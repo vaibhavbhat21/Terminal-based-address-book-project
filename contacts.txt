@@ -1,0 +1,230 @@
+1. Introduction
+
+This project is a simple Address Book application that allows users to store and manage their contacts easily. It allows operations such as creating, searching, editing, deleting, and listing contacts, with input validation, duplicate checks, and sorting.
+
+2. Things Used
+  Structures:
+  Contact: Struct containing a contact’s name, phone number, and email.
+  AddressBook: Struct containing an array of Contact's.
+
+ Functions:
+  It contains functions such as createContact(), searchContact(), editContact(), deleteContact(), and listContacts().
+  and there are other functions for validations like Name(), Phone(), Email(), along with helper functions like swapcontacts() for sorting and isDuplicate() for ensuring unique contact.
+
+3.Program Flow
+
+Step 1: Initialization
+
+When the program starts, it initializes (contactCount = 0) and takes contacts with predefined contacts using the "populateAddressBook()" function.
+
+Step 2:Menu
+  The user can choose from:
+  1. Create a contact
+  2. Search for a contact
+  3. Edit a contact
+  4. Delete a contact
+  5. List all contacts
+  6. Exit the application
+
+Step 3: Creating a Contact
+It takes inputs for the contact’s from user like:
+  1. Name (validated to allow only alphabets and spaces).
+  2. Phone Number (must be exactly 10 digits and, depending on rules, not start with zero).
+  3. Email (validation enforces starting with lowercase letter, contains @ and .com).
+  Before adding the new contact, the program checks for duplicates in phone and email fields.
+  Once all validations pass, the contact is stored in the address book, and the user is notified of successful creation.
+
+Step 4: Searching for Contacts
+
+Users enters any partial or full char to search within the name, phone number, or email fields.
+If: No matches: Informs the user.
+    One match: Shows details and returns the index.
+    Multiple matches: Lists all and asks for further(phone or email) to select uniquely.
+
+Step 5: Editing a Contact
+
+first search and select a contact.
+They can then choose to update the name, phone, or email.
+Each updated field undergoes the same validation and checks for duplicates.
+The contact is updated only if all validations passed.
+
+Step 6: Deleting a Contact
+
+After searching and selecting a contact, the user confirms if they want to delete.
+If confirmed, the selected contact is removed by shifting subsequent contacts, and the total count is decremented.
+User is notified upon successful deletion.
+
+Step 7: Listing Contacts
+
+selecting one sorting criteria: by name, by phone, or by email.
+The program sorts the contacts in ascending order using nested loops and strcmp().
+Sorted contacts are displayed in a clear, tabular format.
+
+step 8: save and Exit
+1. saveContactsToFile(AddressBook addressBook)
+This function saves all the contacts into a file called contact.txt.
+It opens the file in write mode, writes each contact’s name, phone, and email separated by commas,
+and then closes the file and Keeps the contacts safe even after the program is closed.
+
+2. loadContactsFromFile(AddressBook addressBook)
+This function loads contacts from contact.txt back into the program.
+It opens the file in read mode, reads each contact’s details, and stores them in the address book.
+If the file doesn’t exist, it simply says no saved contacts were found and Restores saved contacts when the program starts
+
+
+Sample Program Flow Example:
+
+(For create contact)
+Address Book Menu:
+1. Create contact
+2. Search contact
+3. Edit contact
+4. Delete contact
+5. List all contacts
+6. Exit
+Enter your choice: 1
+
+Enter name for contact: Rob Franc
+Enter phone for contact: 0987654123
+Enter email for contact: rfranc@example.com
+created successfully
+
+(For Search contact)
+Address Book Menu:
+1. Create contact
+2. Search contact
+3. Edit contact
+4. Delete contact
+5. List all contacts
+6. Exit
+Enter your choice: 2
+
+Enter name/phone/email to search: Al
+
+Multiple contacts found:
+1. Name: Alice Smith | Phone: 0987654321 | Email: alice@example.com
+2. Name: Alan Brown | Phone: 0923454567 | Email: alan@example.com
+
+Enter exact phone or email to select a contact: 0987654321
+
+Contact Found:
+Name: Alice Smith
+Phone: 0987654321
+Email: alice@example.com
+
+(For edit contact)
+Address Book Menu:
+1. Create contact
+2. Search contact
+3. Edit contact
+4. Delete contact
+5. List all contacts
+6. Exit
+Enter your choice: 3
+
+Enter name/phone/email to search: Bob Johnson
+
+Contact Found:
+Name: Bob Johnson
+Phone: 1112223333
+Email: bob@company.com
+
+Edit the selected contact by
+1. Name
+2. Phone
+3. Email
+4. Exit
+Enter the choice: 2
+
+Enter new phone number for contact: 9998887777
+edited successfully
+
+Edit the selected contact by
+1. Name
+2. Phone
+3. Email
+4. Exit
+Enter the choice: 4
+
+(For delete contact)
+Address Book Menu:
+1. Create contact
+2. Search contact
+3. Edit contact
+4. Delete contact
+5. List all contacts
+6. Exit
+Enter your choice: 4
+
+Enter name/phone/email to search: Alice Smith
+
+Contact Found:
+Name: Alice Smith
+Phone: 0987654321
+Email: alice@example.com
+
+Are you sure want to delete the selected contact
+1. Yes
+2. No
+Enter the choice: 1
+
+deleted successfully
+
+(For Listing contacts)
+Address Book Menu:
+1. Create contact
+2. Search contact
+3. Edit contact
+4. Delete contact
+5. List all contacts
+6. Exit
+Enter your choice: 5
+
+Select sort criteria:
+1. Sort by name
+2. Sort by phone
+3. Sort by email
+Enter your choice: 1
+
+|       Contact 1:      |       Name:          Alice Smith      |       Phone:           0987654321     |       Email:    alice@example.com     |
+
+|       Contact 2:      |       Name:          Bob Johnson      |       Phone:           1112223333     |       Email:      bob@company.com     |
+
+|       Contact 3:      |       Name:          Carol White      |       Phone:           4445556666     |       Email:    carol@company.com     |
+
+|       Contact 4:      |       Name:          David Brown      |       Phone:           7778889999     |       Email:    david@example.com     |
+
+|       Contact 5:      |       Name:            Eve Davis      |       Phone:           6665554444     |       Email:      eve@example.com     |
+
+|       Contact 6:      |       Name:         Frank Miller      |       Phone:           3334445555     |       Email:    frank@example.com     |
+
+|       Contact 7:      |       Name:         Grace Wilson      |       Phone:           2223334444     |       Email:    grace@example.com     |
+
+|       Contact 8:      |       Name:         Hannah Clark      |       Phone:           5556667777     |       Email:   hannah@example.com     |
+
+|       Contact 9:      |       Name:            Ian Lewis      |       Phone:           8889990000     |       Email:      ian@example.com     |
+
+|       Contact 10:     |       Name:             John Doe      |       Phone:           1234567890     |       Email:     john@example.com     |
+
+
+(For Exiting)
+Address Book Menu:
+1. Create contact
+2. Search contact
+3. Edit contact
+4. Delete contact
+5. List all contacts
+6. Exit
+Enter your choice: 6
+Saving and Exiting...
+
+(For Invalid Number)
+Address Book Menu:
+1. Create contact
+2. Search contact
+3. Edit contact
+4. Delete contact
+5. List all contacts
+6. Exit
+Enter your choice: 7
+Invalid choice. Please try again.
